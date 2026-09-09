@@ -50,9 +50,7 @@ def lotto():
     print("\n[로또 번호 발급 결과]")
     for i in range(1, game_round+1):
         numbers = []
-        while True:
-            if len(numbers) == 6:
-                break
+        while len(numbers) < 6:
             num = random.randint(1, 45)
 
             # 중복 번호 방지
