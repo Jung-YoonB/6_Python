@@ -49,15 +49,11 @@ def lotto():
 
     print("\n[로또 번호 발급 결과]")
     for i in range(1, game_round+1):
-        numbers = []
+        numbers = set()
         while len(numbers) < 6:
-            num = random.randint(1, 45)
-
-            # 중복 번호 방지
-            if num not in numbers:
-                numbers.append(num)
+            numbers.add(random.randint(1, 45))
         
-        print(f"{i}게임: {sorted(numbers)}")
+        print(f"{i}게임: {sorted(list(numbers))}")
 
 # lotto()
 
