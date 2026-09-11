@@ -75,6 +75,7 @@ for amount in [5000, 50000, -1000]:
         print(e)
     except InvalidAmountError as e:
         print(e)
-
+    else:
+        print(f"출금 성공 : {amount}원")
 
 # TODO: 마지막 반복문에 발생되는 예외를 처리 ( ~ 18:00 이메일 제출)
