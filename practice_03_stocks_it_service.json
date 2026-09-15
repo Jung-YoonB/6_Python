@@ -1,0 +1,142 @@
+[
+  {
+    "code": "G0004",
+    "name": "푸른소프트",
+    "sector": "IT서비스",
+    "price": 66014,
+    "rate": -0.85,
+    "volume": 532344,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0004"
+  },
+  {
+    "code": "G0005",
+    "name": "샛별소프트",
+    "sector": "IT서비스",
+    "price": 50360,
+    "rate": -0.3,
+    "volume": 396891,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0005"
+  },
+  {
+    "code": "G0008",
+    "name": "아람데이터",
+    "sector": "IT서비스",
+    "price": 60224,
+    "rate": 1.72,
+    "volume": 604060,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0008"
+  },
+  {
+    "code": "G0015",
+    "name": "해솔아이티",
+    "sector": "IT서비스",
+    "price": 13158,
+    "rate": 1.24,
+    "volume": 750448,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0015"
+  },
+  {
+    "code": "G0023",
+    "name": "청람데이터",
+    "sector": "IT서비스",
+    "price": 114386,
+    "rate": 3.58,
+    "volume": 272697,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0023"
+  },
+  {
+    "code": "G0032",
+    "name": "벼리클라우드",
+    "sector": "IT서비스",
+    "price": 30355,
+    "rate": 0.38,
+    "volume": 112029,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0032"
+  },
+  {
+    "code": "G0035",
+    "name": "자강소프트",
+    "sector": "IT서비스",
+    "price": 22329,
+    "rate": 0.67,
+    "volume": 278813,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0035"
+  },
+  {
+    "code": "G0042",
+    "name": "해원시스템즈",
+    "sector": "IT서비스",
+    "price": 111271,
+    "rate": 2.57,
+    "volume": 276557,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0042"
+  },
+  {
+    "code": "G0046",
+    "name": "넥스트데이터",
+    "sector": "IT서비스",
+    "price": 28509,
+    "rate": 0.05,
+    "volume": 260287,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0046"
+  },
+  {
+    "code": "G0050",
+    "name": "미소소프트",
+    "sector": "IT서비스",
+    "price": 25807,
+    "rate": 1.87,
+    "volume": 133888,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0050"
+  },
+  {
+    "code": "G0058",
+    "name": "명주데이터",
+    "sector": "IT서비스",
+    "price": 14082,
+    "rate": 1.9,
+    "volume": 20625,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0058"
+  },
+  {
+    "code": "G0078",
+    "name": "단비네트웍스",
+    "sector": "IT서비스",
+    "price": 8284,
+    "rate": 2.74,
+    "volume": 234809,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0078"
+  },
+  {
+    "code": "G0098",
+    "name": "새벽시스템즈",
+    "sector": "IT서비스",
+    "price": 29206,
+    "rate": -2.84,
+    "volume": 943755,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0098"
+  },
+  {
+    "code": "G0118",
+    "name": "명주네트웍스",
+    "sector": "IT서비스",
+    "price": 7295,
+    "rate": 2.24,
+    "volume": 540012,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0118"
+  }
+]
