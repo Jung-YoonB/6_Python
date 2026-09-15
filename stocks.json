@@ -1,0 +1,202 @@
+[
+  {
+    "code": "G0001",
+    "name": "가온전자",
+    "sector": "전기전자",
+    "price": 9963,
+    "rate": 0.27,
+    "volume": 2020931,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0001"
+  },
+  {
+    "code": "G0002",
+    "name": "단비자산운용",
+    "sector": "금융",
+    "price": 21387,
+    "rate": -0.26,
+    "volume": 904381,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0002"
+  },
+  {
+    "code": "G0003",
+    "name": "보람금융지주",
+    "sector": "금융",
+    "price": 9151,
+    "rate": 1.79,
+    "volume": 204908,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0003"
+  },
+  {
+    "code": "G0004",
+    "name": "푸른소프트",
+    "sector": "IT서비스",
+    "price": 66014,
+    "rate": -0.85,
+    "volume": 532344,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0004"
+  },
+  {
+    "code": "G0005",
+    "name": "샛별소프트",
+    "sector": "IT서비스",
+    "price": 50360,
+    "rate": -0.3,
+    "volume": 396891,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0005"
+  },
+  {
+    "code": "G0006",
+    "name": "아람리테일",
+    "sector": "유통",
+    "price": 7373,
+    "rate": 1.58,
+    "volume": 53695,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0006"
+  },
+  {
+    "code": "G0007",
+    "name": "백두은행",
+    "sector": "금융",
+    "price": 52990,
+    "rate": -1.88,
+    "volume": 2499902,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0007"
+  },
+  {
+    "code": "G0008",
+    "name": "아람데이터",
+    "sector": "IT서비스",
+    "price": 60224,
+    "rate": 1.72,
+    "volume": 604060,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0008"
+  },
+  {
+    "code": "G0009",
+    "name": "벼리캐피탈",
+    "sector": "금융",
+    "price": 11149,
+    "rate": 0.96,
+    "volume": 54243,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0009"
+  },
+  {
+    "code": "G0010",
+    "name": "태산유통",
+    "sector": "유통",
+    "price": 12670,
+    "rate": 0.47,
+    "volume": 394004,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0010"
+  },
+  {
+    "code": "G0011",
+    "name": "미소소재",
+    "sector": "화학",
+    "price": 7570,
+    "rate": 0.29,
+    "volume": 368374,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0011"
+  },
+  {
+    "code": "G0012",
+    "name": "온누리헬스케어",
+    "sector": "바이오",
+    "price": 13384,
+    "rate": 0.63,
+    "volume": 11085,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0012"
+  },
+  {
+    "code": "G0013",
+    "name": "단비화학",
+    "sector": "화학",
+    "price": 67688,
+    "rate": 0.08,
+    "volume": 164916,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0013"
+  },
+  {
+    "code": "G0014",
+    "name": "한빛가스",
+    "sector": "에너지",
+    "price": 6778,
+    "rate": 4.26,
+    "volume": 378711,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0014"
+  },
+  {
+    "code": "G0015",
+    "name": "해솔아이티",
+    "sector": "IT서비스",
+    "price": 13158,
+    "rate": 1.24,
+    "volume": 750448,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0015"
+  },
+  {
+    "code": "G0016",
+    "name": "단비산업개발",
+    "sector": "건설",
+    "price": 5241,
+    "rate": -2.13,
+    "volume": 331392,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0016"
+  },
+  {
+    "code": "G0017",
+    "name": "가온항공",
+    "sector": "운수장비",
+    "price": 50043,
+    "rate": -0.69,
+    "volume": 758356,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0017"
+  },
+  {
+    "code": "G0018",
+    "name": "단비생명과학",
+    "sector": "바이오",
+    "price": 19946,
+    "rate": 0.22,
+    "volume": 332872,
+    "market": "GX-GROWTH",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0018"
+  },
+  {
+    "code": "G0019",
+    "name": "아람커머스",
+    "sector": "유통",
+    "price": 55662,
+    "rate": -0.97,
+    "volume": 2373485,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0019"
+  },
+  {
+    "code": "G0020",
+    "name": "누리마트",
+    "sector": "유통",
+    "price": 12417,
+    "rate": -1.05,
+    "volume": 1049093,
+    "market": "GX-MAIN",
+    "link": "https://kh-lab.rockua.ai.kr/stocks/G0020"
+  }
+]
