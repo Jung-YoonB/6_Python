@@ -24,15 +24,15 @@ resp = requests.get(f"{BASE}/stocks?sector=S08&market=&q=", headers=HEADERS, tim
 
 resp.raise_for_status()
 
-print(f"▶ [1] 요청된 최종 URL: {resp.url}")
+# print(f"[1] 요청된 최종 URL: {resp.url}")
 
 html = resp.text
 soup = BeautifulSoup(html, 'lxml')
 
 stocks = parse_stocks(html)
 
-print(f"▶ [2] 파싱된 종목 개수: {len(stocks)}개")
-print(f"▶ [3] 파싱 결과 데이터: {stocks}")
+# print(f"[2] 파싱된 종목 개수: {len(stocks)}개")
+# print(f"[3] 파싱 결과 데이터: {stocks}")
 
 def save_json(data, path):
     with open(path, "w", encoding="utf-8") as f:
