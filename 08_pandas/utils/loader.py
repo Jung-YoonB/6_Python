@@ -32,7 +32,7 @@ def load_csv(dedup=True):
 
 def load_prices():
     """ prices.csv 파일 읽어서 DF 반환 """
-    return pd.read_csv(path('prices.csv'), encoding=ENCODING)
+    return pd.read_csv(path('prices.csv'), encoding=ENCODING, parse_dates=["date"])
 
 def load_companies(raw=False):
     """
@@ -47,3 +47,19 @@ def load_companies(raw=False):
         return pd.read_csv(path('raw-companies.csv'), encoding=ENCODING, dtype=str, keep_default_na=False)
 
     return pd.read_csv(path('companies.csv'), encoding=ENCODING)
+
+def load_sectors():
+    """ 종목 섹터 데이터를 불러와서 DataFrame으로 반환 """
+    return pd.read_csv(path('sectors.csv'), encoding=ENCODING)
+
+def load_merged():
+    """ 시세(prices), 종목(companies), 섹터(serctors) 데이터를 결합하여 DataFrame 으로 반환 """
+    prices = load_prices()
+    companies = load_companies()
+    sectors = load_sectors().rename(columns={"code":"sectorCode", "name":"sector"})
+
+    full = (prices
+            .merge(companies[["code", "name", "sectorCode", "market"]], on="code", how="left", validate="many_to_one")
+            .merge(sectors[["sectorCode", "sector"]], on="sectorCode", how="left", validate="many_to_one"))
+
+    return full.drop(columns=["sectorCode"]).sort_values(["code", "date"]).reset_index(drop=True)
