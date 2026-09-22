@@ -18,7 +18,7 @@ df['ret'] = df.groupby('code')['close'].transform(lambda s: s.pct_change() * 100
 """
 차트 선택 기준 (어떤 용도로 사용 할 것인가?)
     - 시간에 따른 변화      : 선 그래프 (plot)
-    - 범주 간 크기 비교     : 막대 그래프 (ber)
+    - 범주 간 크기 비교     : 막대 그래프 (bar)
     - 하나의 분포           : 히스토그램 (hist) 
     - 분포 + 이상치         : 박스 (boxplot)
     - 두 변수의 관계        : 산점도 (scatter)
