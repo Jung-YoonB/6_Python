@@ -18,6 +18,11 @@ PORT = int(os.getenv("DB_PORT", 1521))
 NAME = os.getenv("DB_NAME")
 USER = os.getenv("DB_USER")
 PASSWORD = os.getenv("DB_PASSWORD")
+KHLAB_BASE = os.getenv("KHLAB_BASE", 'https://kh-lab.rockua.ai.kr')
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+ENCODING = "utf-8-sig"
+KHLAB_DATASETS = f"{KHLAB_BASE}/datasets"
 
 def connect(autocommit=False):
     """
@@ -42,3 +47,25 @@ def get_engine():
 
     # pool_pre_ping : 풀에서 커넥션을 꺼낼 때, 아직 살아있는지를 한번 확인
     return create_engine(url, pool_pre_ping=True)
+
+def data_path(name):
+    """ data 폴더 내의 파일 경로를 반환 """
+    return os.path.join(DATA_DIR, name)
+
+def prices_path():
+    """ 시세 데이터의 정제본 파일 경로 또는 URL 반환 """
+    local_path = data_path("prices.csv")
+
+    if os.path.exists(local_path):
+        return local_path
+
+    return f"{KHLAB_DATASETS}/prices.csv"
+
+def raw_prices_path():
+    """ 시세 데이터의 원본 파일 경로 또는 URL 반환 """
+    local_path = data_path("raw-prices.csv")
+
+    if os.path.exists(local_path):
+        return local_path
+
+    return f"{KHLAB_DATASETS}/raw-prices.csv"
