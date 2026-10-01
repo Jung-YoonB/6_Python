@@ -52,7 +52,8 @@ for col in df.columns:
 print("*" * 70)
 print("<dtype이 예상과 다르거나 주의가 필요한 열>")
 print("""
-1. Age          : int64 가 아닌 float64 로 실수형 / 영아의 경우 0.42 처럼 소수로 기록
+1. Age          : int64 가 아닌 float64 로 실수형 결측 
+                  -> NaN이 실수 타입이라 정수 열도 float으로 읽힘 / 영아의 경우 0.42 처럼 소수로 기록
 2. Survived     : int64 지만 0 = 사망 / 1 = 생존으로 의미 없는 범주형
 3. Pclass       : int64 지만 1/2/3 등급의 등급구분 범주형, 1 < 3 이 더 작은 값 X, 더 좋은 등급 O
 4. Sex          : 문자열이므로 상관관계, 수치 계산에 바로 사용 불가
@@ -75,8 +76,8 @@ print("-" * 140)
 
 survived_cnt = df['Survived'].value_counts()
 
-print(f"사망자 (Servived = 0) : {survived_cnt.loc[0]} 명")
-print(f"생존자 (Servived = 1) : {survived_cnt.loc[1]} 명")
+print(f"사망자 (Survived = 0) : {survived_cnt.loc[0]} 명")
+print(f"생존자 (Survived = 1) : {survived_cnt.loc[1]} 명")
 
 # 6 =====================================================================================================
 print("-" * 140)

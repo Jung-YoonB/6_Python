@@ -32,7 +32,7 @@ AGE_BINS = [
 #   호칭 추출 (16번 문제)
 # ===================================================
 def extract_title(name, default='미확인'):
-    """
+    r"""
     이름에서 호칭(Mr, Mrs, Miss, Master 등)을 추출하여 반환
     Args:
         name    : 승객 이름 (예: "Braund, Mr. Owen Harris")
