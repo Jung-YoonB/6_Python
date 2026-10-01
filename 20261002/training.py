@@ -333,3 +333,9 @@ ax.set_title("타이타닉 수치형 변수 상관관계")
 fig.savefig(out("20_corr_heatmap.png"), dpi=120)
 plt.close(fig)
 print(f"저장 완료 : {out('20_corr_heatmap.png').name}")
+
+print("*" * 70)
+print("[output 폴더 저장 파일]")
+# saved_files() : output/ 폴더의 파일 이름 목록 (저장 확인용, chart_config.py 에 정의)
+print(saved_files())
+# 출력 : ['18_age_hist.png', '20_corr_heatmap.png']
