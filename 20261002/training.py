@@ -282,7 +282,7 @@ fig.suptitle("생존 여부에 따른 나이 분포")
 fig.tight_layout()      # 그래프끼리 제목·라벨이 겹치지 않게 간격 자동 조정
 fig.savefig(out("18_age_hist.png"), dpi=120)
 plt.close(fig)
-print(f"저장 완료 : {out('18_age_hist.png').name}")
+print(f"저장 완료")
 
 # 19 =====================================================================================================
 print("-" * 140)
@@ -332,10 +332,8 @@ ax.set_title("타이타닉 수치형 변수 상관관계")
  
 fig.savefig(out("20_corr_heatmap.png"), dpi=120)
 plt.close(fig)
-print(f"저장 완료 : {out('20_corr_heatmap.png').name}")
+print(f"저장 완료")
 
 print("*" * 70)
 print("[output 폴더 저장 파일]")
-# saved_files() : output/ 폴더의 파일 이름 목록 (저장 확인용, chart_config.py 에 정의)
-print(saved_files())
-# 출력 : ['18_age_hist.png', '20_corr_heatmap.png']
+print(saved_files())    # ['18_age_hist.png', '20_corr_heatmap.png']
