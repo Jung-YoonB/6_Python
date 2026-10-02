@@ -39,15 +39,15 @@ def clean_prices(records, logger):
 
     # 1. DataFrame 변환
     df = pd.DataFrame(records)
-    logger.info(f"  입력    {len(df):,} 행")
+    logger.info(f"   입력    {len(df):,}행")
 
     # 2. 숫자 타입 정제
     #    -콤마 제거: "1,000" -> "1000" -> 1000
     #    -변환 실패 시 NaN 처리
     for col in NUM_COLS:
         if col in df.columns:
-            pd.to_numeric(
-                df[col].astype(str).str.replace(",", "", regex=False),
+            df[col] = pd.to_numeric(
+                df[col].astype(str).str.replace(",","",regex=False),
                 errors="coerce"
             )
 
@@ -57,57 +57,60 @@ def clean_prices(records, logger):
     df["date"] = pd.to_datetime(df["date"], format='mixed', errors='coerce')
 
     # 4. 종목코드 정규화
-    #    "G0001" / " G0001" / "G0001 " / "g0001" ...
-    #       --> 대문자로 변경, 공백제거
+    #    "G0001"  / " G0001" / "G0001 " / "g0001" ...
+    #    --> 대문자로 변경. 공백 제거.
     df["code"] = df["code"].astype(str).str.upper().str.strip()
 
-    logger.info(f"  타입 정제   {len(df):,} 행")
+    logger.info(f"  타입 정제    {len(df):,}행")
 
     # 5. 중복 제거
-    #    -> 타입 정제 후에 중복 데이터 체크해야 함
+    #    -> 타입 정제 후에 중복 데이터 체크해야 함!
     before = len(df)
 
     df = df.drop_duplicates(subset=["code", "date"], keep="first")
+    logger.info(f"  중복 제거   {len(df):,}행  ({len(df) - before:+,})")
 
-    logger.info(f"  중복 제거   {len(df):,} 행  ({len(df) - before:+,})")
 
     # 6. 이상치 탐지
+
     # 종목별 날짜순으로 정렬
-    df = df.sort_values(["code", "date"]).reset_index(drop=True)
-    
+    df = df.sort_values(["code","date"]).reset_index(drop=True)
+
     def is_outlier(s):
         """
-        s : 한 종목의 종가 Series
-        [IQR 방식]
-            Q1 (25 qnsdnltn) 와 Q3 (75 분위수)를 구하고,
-            IQP = Q3 - Q1
+            s : 한 종목의 종가 Series
 
-            Q1 - 1.5 * IQR 미만이거나, Q3 + 1.5 * IQR 초과면 이상치로 판단함
+            [IQR 방식]
+                Q1(25 분위수)와 Q3(75 분위수)를 구하고,
+                IQR = Q3 - Q1로 정의
+
+                Q1 - 1.5 * IQR 미만이거나, Q3 + 1.5 * IQR 초과면 이상치로 판단함
         """
         q1, q3 = s.quantile([0.25, 0.75])
         iqr = q3 - q1
 
         return (s < q1 - 1.5 * iqr) | (s > q3 + 1.5 * iqr)
-    
-    stat = df.groupby("code")["close"].transform(is_outlier)        # 통계적 이상치
-    logic = (df['close'] > df['high']) | (df['close'] < df['low'])  # 논리적 이상치
 
-    n_out = int((stat | logic).sum())   # 통계적 이상치 또는 논리적 이상치에 해당하는 건수
+    stat = df.groupby("code")["close"].transform(is_outlier) # 통계적 이상치
 
-    # 이상치로 판단 된 종가 데이터를 NaN 으로 변경
+    logic = (df['close'] > df['high']) | (df['close'] < df['low']) # 논리적 이상치
+
+    n_out = int((stat | logic).sum())  # 통계적 이상치 또는 논리적 이상치에 해당하는 건수
+
+    # 이상치로 판단된 종가 데이터를 NaN 으로 변경
     df.loc[stat | logic, "close"] = pd.NA
-    df["close"] = pd.to_numeric(df["close"], errors="coerce")   # pd.NA --> float NaN (명시적 변환)
+    df["close"] = pd.to_numeric(df["close"], errors="coerce")  # pd.NA --> float NaN (명시적 변환)
 
-    # 거래량(volume)아 음수인 경우 NaN으로 변경
-    df.loc[df["volume"] < 0, "volume"] - pd.NA
+    # 거래량(volume)이 음수인 경우 NaN으로 변경
+    df.loc[df["volume"] < 0, "volume"] = pd.NA
     df["volume"] = pd.to_numeric(df["volume"], errors="coerce")
 
-    logger.info(f"  이상치 탐지/처리    {len(df):,} 행  ({n_out:,}) 건 -> NaN")
+    logger.info(f"  이상치 탐지/처리   {len(df):,}행  ({n_out:,}건 -> NaN)")
 
     # 7. 결측 보간
-    #    - interpolate()    : 선형 보간, 앞 뒤 값의 중간값으로 채워줌
-    #    - ffill()          : 직전 값으로 채워줌
-    #    - dfill()          : 직후 값으로 채워줌
+    #    - interpolate()   : 선형 보간. 앞 뒤 값의 중간값으로 채워줌.
+    #    - ffill()         : 직전 값으로 채워줌.  (forward fill)
+    #    - bfill()         : 직후 값으로 채워줌.  (backward fill)
     for col in OHLC:
         df[col] = df.groupby("code")[col].transform(
             lambda s: s.interpolate().ffill().bfill()
@@ -115,30 +118,29 @@ def clean_prices(records, logger):
 
     # 8. OHLC 정합성 - clip
     #    clip(lower=..., upper=...)
-    #       => lower 미만이면 lower 값으로, upper 초과면 upper 값으로 변경
-    logger.info(f"  OHLC 정합성 처리 전 (종가 결측 : {df['close'].isna().sum():,})")
+    #    => lower 미만이면 lower값으로, upper 초과면 upper값으로 변경
+    logger.info(f"  OHLC 정합성 처리 전 (종가 결측: {df['close'].isna().sum():,})")
     df["close"] = df["close"].clip(lower=df["low"], upper=df["high"])
 
-    logger.info(f"  OHLC 정합성 처리 후 (종가 결측 : {df['close'].isna().sum():,})")
-    
-    # 9. 소수점 -> 정수 (반올림)
+    logger.info(f"  OHLC 정합성 처리 후 (종가 결측: {df['close'].isna().sum():,})")
+
+    # 9. 반올림
     #    OHLC => 실수 타입으로 처리(결측, 보간, ...)
-    #       => DB(Oracle)에 해당 컬럼들이 NUMBER(20) 정수 형태이므로 반올림 처리
+    #    DB(Oracle)에 해당 컬럼들이 NUMBER(20) 정수 형태이므로 반올림 처리
     n_round = int((df[OHLC] % 1 != 0).sum().sum())
-    
     for col in OHLC:
         df[col] = df[col].round(0)
-
-    logger.info(f"  정수 반올림 처리 {len(df):,} 행 (처리 대상: {n_round:,} 개)")
+    logger.info(f"  정수 반올림 처리  {len(df):,}행 (처리 대상: {n_round:,}개)")
 
     # 10. 등락, 등락률 재계산
-    #   => 종간 보간, 반올림 처리를 하면서 데이터가 변경되었으므로 원본의 change, changeRate를 그대로 사용할 수 없음
-    prev = df.groupby("code")["close"].shift(1) # 종목별 직전(전일) 종가를 구해줌
+    #     종가 보간, 반올림 처리를 하면서 데이터가 변경되었으므로 원본의 change, changeRate 를 그대로 사용할 수 없음!
+    prev = df.groupby("code")["close"].shift(1)   # 종목별 직전(전일) 종가를 구해줌.
 
-    df["change"] = (df["close"] - prev).round(0)
+    df["change"]     = (df["close"] - prev).round(0)
     df["changeRate"] = ((df["close"] - prev) / prev * 100).round(2)
 
     return df
+    
 
 def validate(df, logger):
     """
@@ -152,20 +154,20 @@ def validate(df, logger):
         - OHLC 논리 정합성 : 저가 <= 시가,종가 <= 고가
         - 거래량이 음수가 아닌지
     """
-    # [(항목 이름, 검증 결과), ...]
+    # [(항목이름, 검증결과),....]
     checks = [
         ("날짜 타입 (datetime)", pd.api.types.is_datetime64_any_dtype(df["date"])),
-        ("중복 데이터 (code, date)", df.duplicated(subdet=["code", "date"]).sum() == 0),
+        ("중복 데이터 (0 / code,date)", df.duplicated(subset=["code", "date"]).sum() == 0),
         ("종가 데이터 결측 (0)", df["close"].isna().sum() == 0),
-        ("OHLC 정합성", ((df["low"] <= df["close"]) & (df["close"] <= df["high"])).all()),
-        ("거래량 음수 (0)", bool((df["volume"].dropna() >= 0).all())),
+        ("OHLC 정합성", bool( ((df["low"] <= df["close"]) & (df["close"] <= df["high"])).all() ) ),
+        ("거래량 음수 (0)", bool( (df["volume"].dropna() >= 0).all() )  ),
     ]
 
     # 실패한 항목의 이름(첫번째)만 리스트로 저장
     failed = [n for n, ok in checks if not ok]
 
     for name, ok in checks:
-        logger.info(f"  {'OK  ' if ok else 'FAIL'} {name}")
+        logger.info(f"   {'OK  ' if ok else 'FAIL'} {name}")
 
     if failed:
         raise ValueError(f"검증 실패: {failed}")

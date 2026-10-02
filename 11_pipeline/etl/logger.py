@@ -22,7 +22,7 @@ import logging
 import os
 from datetime import datetime
 
-from config import LOG_DIR
+from .config import LOG_DIR
 
 def setup(name="pipeline", level=logging.INFO):
     """

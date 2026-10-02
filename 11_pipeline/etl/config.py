@@ -5,7 +5,7 @@
 """
 import os
 
-from _db import connect, get_engine, ENCODING, KHLAB_BASE, data_path, prices_path, raw_prices_path
+from ._db import connect, get_engine, ENCODING, KHLAB_BASE, data_path, prices_path, raw_prices_path
 
 # ---- 환경 변수 기반 설정 ----
 SOURCE = os.getenv("PIPELINE_SOURCE", "csv")  # Extract 방식: "api" 또는 "csv"
