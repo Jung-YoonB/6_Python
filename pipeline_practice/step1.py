@@ -1,10 +1,7 @@
 """
 ## STEP 1 · 진단
-
 정제하기 전에 **무엇이 얼마나 망가졌는지** 파악합니다.
-
 세 파일을 읽고 아래를 확인해 표로 정리하세요.
-
 - 각 파일의 행 수, 컬럼별 dtype
 - 숫자여야 하는데 문자열로 읽힌 컬럼
 - 컬럼별 결측 수와 비율
@@ -130,3 +127,22 @@ print("-" * 100)
 
 # [4] 확인 문항 ------------------------------------------------------------------------------------------
 print()
+n_rows = len(bikes_raw)
+n_bikes = bikes_raw['bike_id'].nunique()
+n_dup = bikes_raw.duplicated().sum()
+
+d = rentals_raw['distance_km']
+print(d[pd.to_numeric(d, errors='coerce').isna()].value_counts())
+
+print(f"""
+1. `raw-bikes.csv` 는 55행인데 자전거는 몇 대입니까? 왜 다릅니까?
+    - {n_rows} 행 중 자전거는 {n_bikes} 대
+    - 모든 컬럼이 동일한 행이 {n_dup} 개 반복해서 들어가 있음 (완전 중복값)
+
+2. `bike_type` 의 고유값은 몇 종류입니까? 실제로는 몇 종류여야 합니까?
+    - 현재 : 6종류
+    - 실제 : 2종류 (일반 / 전동)
+
+3. `distance_km` 을 숫자로 못 바꾸는 값에는 어떤 것들이 있습니까?
+    - N/A : 212 건
+""")
