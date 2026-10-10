@@ -34,7 +34,7 @@ bikes_raw = pd.read_csv(path('raw-bikes.csv'), encoding=ENCODING, dtype=str, kee
 
 def clean_bikes(df):
     """
-    raw-bikes.csv 원본을 정제한 DataFrame의 반환
+    raw-bikes.csv 원본을 정제한 DataFrame 반환
     Args:
         df : dtype=str, keep_default_na=False 로 읽은 원본
     """
